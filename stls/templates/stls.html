@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+
+{% block content_header %}
+      <div class="container">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">STLs</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+               <a title="Subir Nuevo STL" href="{% url 'stl_upload' %}" 
+                               class="btn btn-success bt-lg float-right"> 
+                 <i class="fa fa-plus"></i>
+               </a>
+          </div>
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+{% endblock %}
+{% block content %}
+
+{% include 'partials/mensajes.html' %}
+
+ <section class="content">
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Listado</h3>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th style="width: 25%; text-align:center">
+                          Nombre
+                      </th>
+                      <th style="width: 25%; text-align:center">
+                          Archivo
+                      </th>
+                      <th style="width: 35%; text-align:center">
+                          Observaciones
+                      </th>
+                      <th style="width: 15%; text-align:right">Acciones</th>
+                  </tr>
+              </thead>
+              <tbody>
+              {% for stl in stls %}
+                  <tr>
+                      <td class="text-center">{{stl.nombre}}</td>
+                      <td class="text-center">
+                         <a title="Descargar STL" href="{{stl.archivo.url}}"><i class="fas fa-download"></i></a>
+                       </td>
+                      <td class="text-center">{{stl.observaciones}}</td>
+                      <td class="text-right">
+                        <a data-toggle="modal" data-target="#idmodal_borrar_{{stl.pk}}" 
+                        title="Borrar STL" class="btn btn-danger btn-sm" href="#">
+                          <i class="fa fa-trash">
+                          </i>
+                        </a>
+
+                      </td>
+
+                      <!-- modal para el borrado -->
+                      <div class="modal fade" id="idmodal_borrar_{{stl.pk}}" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">¿Está seguro de Borrar el STL?</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <h2>{{stl}}</h2>
+                            </div>
+                            <div class="modal-footer">
+                              <a title="Borrar stl" class="btn btn-danger btn-lg" 
+                                                    href="{% url 'stl_delete' stl.pk %}">
+                                                      <i class="fa fa-trash">
+                                                      </i>
+                                                      Borrar
+                                                </a>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>  <!-- /modal -->
+
+                  </tr>
+                 {% endfor %}
+              </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+
+{% endblock %}
+

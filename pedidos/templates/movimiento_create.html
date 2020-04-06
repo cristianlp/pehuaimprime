@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+<div class="content-wrapper">
+
+{% block content_header %}
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12 text-center">
+            <h1>Nuevo Movimiento</h1>
+          </div>
+     
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'partials/forms.html' %}
+
+<form action="{% url 'movimiento_create' pedido.pk %}" method="post" >
+   {% csrf_token %}
+    <section class="content">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">General</h3>
+            </div>
+            <div class="card-body">
+             <div class="row">
+                <div class="col-sm-2">  
+                  <div class="form-group">
+                    <label for="idcantidad_entregada">Cant.Entregada <small>(oblig)</small></label>
+                    <input max="{{pedido.cantidad_pendiente}}" type="number" min="1" id="idcantidad_entregada" name="cantidad_entregada" class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-4">  
+                  <div class="form-group">
+                    <label for="identregado_por">Entregado por <small>(opcional)</small></label>
+                    <input type="text" id="identregado_por" name="entregado_por" class="form-control">
+                  </div>
+                </div>
+
+                <div class="col-sm-2">  
+                  <div class="form-group">
+                    <label for="idfecha">Fecha Entrega <small>(oblig)</small></label>
+                    <input value="{% now 'Y-m-d' %}" type="date" id="idfecha_entrega" name="fecha_entrega" 
+                           class="form-control">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">  
+                  <div class="form-group">
+                    <label for="idobservaciones">Observaciones <small>(opcional)</small></label>
+                    <textarea rows="2" class="form-control" name="observaciones"></textarea>
+                  </div>
+                </div>
+
+              </div> <!--/row-->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        
+ 
+      </div>
+
+         </section>
+
+    <div class="row">
+        <div class="col-sm-12">
+          <a href="{% url 'movimientos' pedido.pk %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i>&nbsp;Cancelar</a>
+          <input type="submit" value="Crear Nueva Entrega" 
+                 class="btn btn-success btn-lg float-right mb-4">
+        </div>
+      </div>
+
+    </form>
+    <!-- /.content -->
+  {% endblock %}
+
+</div>  <!-- /.content-wrapper -->

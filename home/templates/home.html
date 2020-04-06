@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Pehua Imprime Salud</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div> <!-- /.content-header -->
+
+    <div class="content">
+      <div class="container-fluid">
+
+     <div class="row">
+          <div class="col-12">
+
+            <div class="card">
+              <div class="card-header d-flex p-0">
+                <h3 class="card-title p-3">Situación al {% now 'd/m/Y' %}</h3>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-4 col-sm-6 col-12">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info"><i class="fa fa-check"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Pedidos</span>
+                                <span class="info-box-number">{{total_pedidos}}</span>
+                            </div> <!-- /.info-box-content -->
+                        </div> <!-- /.info-box -->
+                        </div> <!-- /col -->   
+  
+                       <div class="col-md-4 col-sm-6 col-12">
+                          <div class="info-box">
+                             <span class="info-box-icon bg-success"><i class="fa fa-check-double"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Entregados</span>
+                                <span class="info-box-number">{{total_entregados}}</span>
+                            </div> <!-- /.info-box-content -->
+                          </div> <!-- /.info-box -->
+                       </div> <!-- /col -->   
+                       <div class="col-md-4 col-sm-6 col-12">
+                          <div class="info-box">
+                             <span class="info-box-icon bg-danger"><i class="fa fa-cogs"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Pendientes</span>
+                                <span class="info-box-number">{{total_pendientes}}</span>
+                            </div> <!-- /.info-box-content -->
+                          </div> <!-- /.info-box -->
+                       </div> <!-- /col -->   
+                    </div> <!-- /row -->
+
+              </div> <!-- /card-body -->
+
+           </div> <!-- /card -->
+            
+        </div> <!--/col-12 -->
+
+     </div> <!-- /row -->
+
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+{% endblock %}
+
+{% block js %}
+
+<script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+<div class="content-wrapper">
+
+{% block content_header %}
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12 text-center">
+            <h1>Nueva Entidad</h1>
+          </div>
+     
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'partials/forms.html' %}
+
+<form action="{% url 'entidad_create' %}" method="post" >
+   {% csrf_token %}
+    <section class="content">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">General</h3>
+            </div>
+            <div class="card-body">
+             <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label for="idnombre">Nombre Entidad <small>(obligatorio)</small></label>
+                    <input type="text" id="idnombre" name="nombre" 
+                           class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-4">  
+                  <div class="form-group">
+                    <label for="idcontacto">Datos Contacto <small>(obligatorio)</small></label>
+                    <input type="text" id="idcontacto" name="contacto" class="form-control">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">  
+                  <div class="form-group">
+                    <label for="idtelefonocontacto">Tel Contacto</label>
+                    <input type="text" id="idtelefono" name="telefono_contacto" class="form-control">
+                  </div>
+                </div>
+
+              </div> <!-- /row -->  
+              <div class="row">
+                <div class="col-sm-12">  
+                  <div class="form-group">
+                    <label for="idobservaciones">Observaciones</label>
+                    <textarea rows="2" class="form-control" name="observaciones"></textarea>
+                  </div>
+                </div>
+
+              </div> <!--/row-->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        
+ 
+      </div>
+
+         </section>
+
+    <div class="row">
+        <div class="col-sm-12">
+          <a href="{% url 'entidades' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i>&nbsp;Cancelar</a>
+          <input type="submit" value="Crear Nueva Entidad" 
+                 class="btn btn-success btn-lg float-right mb-4">
+        </div>
+      </div>
+
+    </form>
+    <!-- /.content -->
+  {% endblock %}
+
+</div>  <!-- /.content-wrapper -->

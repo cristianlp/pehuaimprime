@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+<div class="content-wrapper">
+
+{% block content_header %}
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-12 text-center">
+            <h1>Editar Pedido</h1>
+          </div>
+     
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+{% endblock %}
+
+{% block content %}
+
+{% include 'partials/forms.html' %}
+
+<form action="{% url 'pedido_edit' pedido.pk %}" method="post" >
+   {% csrf_token %}
+    <section class="content">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card card-primary">
+            <div class="card-header">
+              <h3 class="card-title">General</h3>
+            </div>
+            <div class="card-body">
+             <div class="row">
+                <div class="col-sm-8">
+                  <div class="form-group">
+                      <label for="idnombre">Entidad <small>(obligatorio)</small></label>
+                      <select name="entidad" class="form-control">
+                        <option disabled selected value="-1">-- Elegir una entidad --</option>
+                        {% for entidad in entidades %}
+                                  <option {% if entidad.pk == pedido.entidad.pk %} selected {% endif %} value="{{entidad.pk}}">{{entidad.nombre}}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+                </div>
+
+                <div class="col-sm-2">  
+                  <div class="form-group">
+                    <label for="idcantidad_pedida">Cant.Pedida <small>(obligatorio)</small></label>
+                    <input value="{{form.cantidad_pedida.value}}" type="text" id="idcantidad_pedida" name="cantidad_pedida" class="form-control">
+                  </div>
+                </div>
+
+                <div class="col-sm-2">  
+                  <div class="form-group text-center">
+                    <label for="idprioridad">Prioridad</label>
+                    <select name="prioridad" class="form-control">
+                      {% for prioridad in prioridades %}
+                                <option {% if prioridad.0.upper == pedido.prioridad.upper %} selected {% endif %} 
+                                value="{{prioridad.0}}">{{prioridad.1}}</option>
+                      {% endfor %}
+                  </select>
+
+
+                  </div>
+                </div>
+
+
+              </div> <!-- /row -->  
+              <div class="row">
+                <div class="col-sm-12">  
+                  <div class="form-group">
+                    <label for="idobservaciones">Observaciones</label>
+                    <textarea rows="2" class="form-control" name="observaciones">{{pedido.observaciones|default_if_none:''}}</textarea>
+                  </div>
+                </div>
+
+              </div> <!--/row-->
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        
+ 
+      </div>
+
+         </section>
+
+    <div class="row">
+        <div class="col-sm-12">
+          <a href="{% url 'pedidos' %}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i>&nbsp;Cancelar</a>
+          <input type="submit" value="Guardar" 
+                 class="btn btn-success btn-lg float-right mb-4">
+        </div>
+      </div>
+
+    </form>
+    <!-- /.content -->
+  {% endblock %}
+
+</div>  <!-- /.content-wrapper -->

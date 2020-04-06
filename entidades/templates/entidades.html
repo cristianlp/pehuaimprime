@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+
+{% block content_header %}
+      <div class="container">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Entidades</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+               <a title="Nueva Entidad" href="{% url 'entidad_create' %}" 
+                               class="btn btn-success bt-lg float-right"> 
+                 <i class="fa fa-plus"></i>
+               </a>
+          </div>
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+{% endblock %}
+{% block content %}
+
+{% include 'partials/mensajes.html' %}
+
+ <section class="content">
+
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Listado</h3>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th style="width: 30%">
+                          Nombre Entidad
+                      </th>
+                      <th style="width: 30%; text-align:center">
+                          Datos Contacto
+                      </th>
+                      <th style="width: 25%; text-align:center">
+                        Tel Contacto
+                    </th>
+                     <th style="width: 15%; text-align:right">Acciones</th>
+                  </tr>
+              </thead>
+              <tbody>
+              {% for entidad in entidades %}
+                  <tr>
+                      <td>
+                          {{entidad.nombre}}
+                      </td>
+                      <td  style="text-align:center">
+                        {{entidad.contacto}}
+                      </td>
+                      <td  style="text-align:center">
+                        {{entidad.telefono_contacto}}
+                      </td>
+
+                      <td class="text-right">
+                          <a title="Editar Entidad" class="btn btn-info btn-sm" 
+                             href="{% url 'entidad_edit' entidad.pk %}">
+                              <i class="fas fa-pencil-alt">
+                              </i>
+                          </a>
+                          <a data-toggle="modal" data-target="#idmodal_borrar_{{entidad.pk}}" 
+                          title="Borrar Entidad" class="btn btn-danger btn-sm" href="#">
+                            <i class="fa fa-trash">
+                            </i>
+                          </a>
+
+                      </td>
+
+                      <!-- modal para el borrado -->
+                      <div class="modal fade" id="idmodal_borrar_{{entidad.pk}}" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">¿Está seguro de Borrar la Entidad?</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <h2>{{entidad}}</h2>
+                            </div>
+                            <div class="modal-footer">
+                              <a title="Borrar entidad" class="btn btn-danger btn-lg" 
+                                                    href="{% url 'entidad_delete' entidad.pk %}">
+                                                      <i class="fa fa-trash">
+                                                      </i>
+                                                      Borrar
+                                                </a>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- /modal -->
+
+                  </tr>
+                 {% endfor %}
+              </tbody>
+          </table>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+
+{% endblock %}
+
