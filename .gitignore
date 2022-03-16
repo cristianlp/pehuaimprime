@@ -8,3 +8,4 @@ db.sqlite3*
 /recursos
 *.txt
 .env.dev
+.vscode
