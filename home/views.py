@@ -5,7 +5,7 @@ from rest_framework import views
 from rest_framework.response import Response
 
 from pedidos.models import Pedido, Movimiento
-from .serializers import HomeSerializer
+#from .serializers import HomeSerializer
 
 def home(request):
     total_pedidos = Pedido.objects.all().aggregate(Sum('cantidad_pedida'))['cantidad_pedida__sum']
